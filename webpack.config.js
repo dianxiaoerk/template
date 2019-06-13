@@ -1,6 +1,6 @@
 const htmlWebpackPlugin = require('html-webpack-plugin') // 导入html模板插件
 const webpackMerge = require('webpack-merge') //导入合并插件
-const webpack = require('webpack') //引入webpack  使用内置插件
+
 
 /* 根据命令进行不同的模式操作  配置模式  生产/开发*/
 const configMode = (mode) => {
@@ -16,12 +16,16 @@ module.exports = ({
     entry: {
       index: './src/js/index.js'
     },
+
     /* 插件配置 */
     plugins: [
       new htmlWebpackPlugin({ //html文件模板
-        template: './src/view/index.html',
+        template: './src/view/index.html', //模板文件名字
+        filename: '../view/index.html', //输出文件的名字及目录
+        chunks: ['index'], //配置需要引入的js文件  不配置默认引入全部的js文件
+        /*    excludeChunks: [],//配置不需要引入的js文件和chunks相反 */
+
       }),
-      new webpack.ProgressPlugin() //显示打包进度
     ],
     /* 依赖项配置 */
     module: {
